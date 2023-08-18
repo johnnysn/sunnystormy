@@ -1,0 +1,2 @@
+INSERT INTO PROMPT (id, content, response, timestamp) VALUES (RANDOM_UUID(), 'Please', 'Sure', CURRENT_TIMESTAMP());
+INSERT INTO PROMPT (id, content, response, timestamp) VALUES (RANDOM_UUID(), 'Please 2', 'Sure 2', CURRENT_TIMESTAMP());

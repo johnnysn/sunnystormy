@@ -1,8 +1,8 @@
 package com.uriel.sunnystormy.controller;
 
-import com.uriel.sunnystormy.dto.NewsOutDTO;
-import com.uriel.sunnystormy.mapper.NewsMapper;
-import com.uriel.sunnystormy.service.NewsService;
+import com.uriel.sunnystormy.dto.PromptOutDTO;
+import com.uriel.sunnystormy.mapper.PromptMapper;
+import com.uriel.sunnystormy.service.PromptService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -13,16 +13,19 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/news")
+@RequestMapping("/prompt")
 @RequiredArgsConstructor
-public class NewsController {
+public class PromptController {
 
-    private final NewsService service;
-    private final NewsMapper mapper;
+    private final PromptService service;
+    private final PromptMapper mapper;
 
     @GetMapping
-    public Page<NewsOutDTO> findAll(@RequestParam(required = false) Integer page) {
-        var pageable = PageRequest.of(page == null ? 0 : page, 5, Sort.by("date").descending());
+    public Page<PromptOutDTO> findAll(@RequestParam(required = false) Integer page) {
+        var pageable = PageRequest.of(
+                page == null ? 0 : page, 5,
+                Sort.by("timestamp").descending()
+        );
         return service.findAll(pageable).map(mapper::entityToDto);
     }
 

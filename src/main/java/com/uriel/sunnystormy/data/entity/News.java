@@ -32,4 +32,15 @@ public class News {
     @NotBlank(message = "Content must not be empty")
     private String content;
 
+    @NotNull(message = "Flavor must not be empty")
+    private Flavor flavor;
+
+    public enum Flavor {
+        SUNNY, STORMY
+    }
+
+    @OneToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "prompt_id")
+    private Prompt prompt;
+
 }
