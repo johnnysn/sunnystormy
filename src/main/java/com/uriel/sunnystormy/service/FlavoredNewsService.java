@@ -1,7 +1,7 @@
 package com.uriel.sunnystormy.service;
 
-import com.uriel.sunnystormy.data.entity.News;
-import com.uriel.sunnystormy.data.repository.NewsRepository;
+import com.uriel.sunnystormy.data.entity.FlavoredNews;
+import com.uriel.sunnystormy.data.repository.FlavoredNewsRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 
 @Service
 @RequiredArgsConstructor
-public class NewsService {
+public class FlavoredNewsService {
 
-    private final NewsRepository repository;
+    private final FlavoredNewsRepository repository;
 
-    public Page<News> findAll(PageRequest pageable) {
+    public Page<FlavoredNews> findAll(PageRequest pageable) {
         return repository.findAll(pageable);
     }
 }

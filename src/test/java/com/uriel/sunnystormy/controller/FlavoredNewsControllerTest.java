@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @SpringBootTest
 @AutoConfigureMockMvc
-class NewsControllerTest {
+class FlavoredNewsControllerTest {
 
     @Autowired
     private MockMvc mockMvc;
@@ -25,7 +25,7 @@ class NewsControllerTest {
     @Test
     @SqlGroup({
             @Sql(value = "classpath:db/reset.sql", executionPhase = BEFORE_TEST_METHOD),
-            @Sql(value = "classpath:db/news.sql", executionPhase = BEFORE_TEST_METHOD),
+            @Sql(value = "classpath:db/flavored-news.sql", executionPhase = BEFORE_TEST_METHOD),
     })
     void shouldRetrieveLastNews() throws Exception {
         this.mockMvc.perform(get("/news"))
@@ -35,9 +35,9 @@ class NewsControllerTest {
                 .andExpect(jsonPath("$.content", Matchers.hasSize(2)))
                 .andExpect(jsonPath("$.totalElements").value(2))
                 .andExpect(jsonPath("$.number").value(0))
-                .andExpect(jsonPath("$.content.[0].title").value("Good News"))
+                .andExpect(jsonPath("$.content.[0].flavoredTitle").value("Good News"))
                 .andExpect(jsonPath("$.content.[0].flavor").value("SUNNY"))
-                .andExpect(jsonPath("$.content.[1].title").value("Bad News"))
+                .andExpect(jsonPath("$.content.[1].flavoredTitle").value("Bad News"))
                 .andExpect(jsonPath("$.content.[1].flavor").value("STORMY"))
         ;
     }
