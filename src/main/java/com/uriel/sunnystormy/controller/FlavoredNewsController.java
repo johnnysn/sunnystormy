@@ -4,6 +4,7 @@ import com.uriel.sunnystormy.dto.FlavoredNewsOutDTO;
 import com.uriel.sunnystormy.mapper.FlavoredNewsMapper;
 import com.uriel.sunnystormy.service.FlavoredNewsService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
@@ -20,9 +21,17 @@ public class FlavoredNewsController {
     private final FlavoredNewsService service;
     private final FlavoredNewsMapper mapper;
 
+    @Value("${news.provide.maximum-page-size}")
+    private Integer maxPageSize;
+
     @GetMapping
-    public Page<FlavoredNewsOutDTO> findAll(@RequestParam(required = false) Integer page) {
-        var pageable = PageRequest.of(page == null ? 0 : page, 5, Sort.by("originalNews.date").descending());
+    public Page<FlavoredNewsOutDTO> findAll(
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer size
+    ) {
+        int pageNumber = page == null ? 0 : page;
+        int pageSize = size == null ? maxPageSize : Math.min(size, maxPageSize);
+        var pageable = PageRequest.of(pageNumber, pageSize, Sort.by("originalNews.date").descending());
         return service.findAll(pageable).map(mapper::entityToDto);
     }
 
