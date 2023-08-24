@@ -1,7 +1,7 @@
 package com.uriel.sunnystormy.controller;
 
-import com.uriel.sunnystormy.dto.FlavoredNewsOutDTO;
-import com.uriel.sunnystormy.mapper.FlavoredNewsMapper;
+import com.uriel.sunnystormy.controller.dto.FlavoredNewsOutDTO;
+import com.uriel.sunnystormy.controller.mapper.FlavoredNewsMapper;
 import com.uriel.sunnystormy.service.FlavoredNewsService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;

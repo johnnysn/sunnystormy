@@ -1,0 +1,20 @@
+{
+  "status": "ok",
+  "totalResults": 36,
+  "articles": [
+    {
+      "author": "By <a href=\"/profiles/tara-subramaniam\">Tara Subramaniam</a>, Jack Guy, Ed Upright, <a href=\"/profiles/leinz-vales\">Leinz Vales</a> and Mike Hayes, CNN",
+      "title": "Russia's war in Ukraine: Live updates - CNN",
+      "description": "The Netherlands will give Ukraine 42 F-16 fighter jets, Ukrainian President Volodymyr Zelensky said. Denmark has also pledged 19 of the US-made aircraft to Ukraine. Follow here for live news updates.",
+      "urlToImage": "https://cdn.cnn.com/cnnnext/dam/assets/230819142631-07-chernihiv-missile-attack-0819-super-tease.jpg",
+      "publishedAt": "2023-08-21T20:12:00Z"
+    },
+    {
+      "author": "Associated Press",
+      "title": "Justice Department objects to Trump's proposed April 2026 date for DC trial - Yahoo News",
+      "description": "Federal prosecutors objected Monday to the April 2026 trial date proposed by lawyers for Donald Trump in the case accusing the former president of scheming...",
+      "urlToImage": "https://s.yimg.com/ny/api/res/1.2/lEdUmx40C.DnmlwW4TC4vw--/YXBwaWQ9aGlnaGxhbmRlcjt3PTEyMDA7aD04MDA-/https://media.zenfs.com/en/ap.org/f0f3b95ce4bf8114f1911be90ff84ef3",
+      "publishedAt": "2023-08-21T20:05:37Z"
+    }
+  ]
+}

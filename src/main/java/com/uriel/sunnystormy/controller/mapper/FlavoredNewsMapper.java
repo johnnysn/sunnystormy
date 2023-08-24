@@ -1,7 +1,7 @@
-package com.uriel.sunnystormy.mapper;
+package com.uriel.sunnystormy.controller.mapper;
 
 import com.uriel.sunnystormy.data.entity.FlavoredNews;
-import com.uriel.sunnystormy.dto.FlavoredNewsOutDTO;
+import com.uriel.sunnystormy.controller.dto.FlavoredNewsOutDTO;
 import org.mapstruct.Mapper;
 
 @Mapper(componentModel = "spring")

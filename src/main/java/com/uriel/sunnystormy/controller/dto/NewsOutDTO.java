@@ -1,4 +1,4 @@
-package com.uriel.sunnystormy.dto;
+package com.uriel.sunnystormy.controller.dto;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -9,7 +9,7 @@ public record NewsOutDTO(
         UUID id,
         @JsonFormat(pattern = "yyyy-MM-dd")
         LocalDate date,
-        String flavoredTitle,
+        String title,
         String content,
         String imgUrl
 ) {

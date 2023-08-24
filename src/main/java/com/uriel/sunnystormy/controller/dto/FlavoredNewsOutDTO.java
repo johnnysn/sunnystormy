@@ -1,4 +1,4 @@
-package com.uriel.sunnystormy.dto;
+package com.uriel.sunnystormy.controller.dto;
 
 import com.uriel.sunnystormy.data.entity.FlavoredNews;
 
