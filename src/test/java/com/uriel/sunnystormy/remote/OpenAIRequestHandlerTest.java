@@ -3,6 +3,7 @@ package com.uriel.sunnystormy.remote;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
+import org.junit.Assert;
 import org.junit.jupiter.api.*;
 
 import java.io.File;
@@ -12,7 +13,7 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.stream.Collectors;
 
-class NewsAPIOrgRequestHandlerTest {
+class OpenAIRequestHandlerTest {
 
     public static MockWebServer mockBackEnd;
 
@@ -27,32 +28,36 @@ class NewsAPIOrgRequestHandlerTest {
         mockBackEnd.shutdown();
     }
 
-    private NewsAPIOrgRequestHandler subject;
+    private OpenAIRequestHandler subject;
 
     private String testResponse;
 
     @BeforeEach
     void initialize() throws IOException, URISyntaxException {
         String baseUrl = String.format("http://localhost:%s", mockBackEnd.getPort());
-        subject = new NewsAPIOrgRequestHandler(baseUrl, "saddasdasdasd");
+        subject = new OpenAIRequestHandler(baseUrl, "saddasdasdasd");
 
-        File jsonFile = new File(getClass().getClassLoader().getResource("remote/news-api-org.json").toURI());
+        File jsonFile = new File(getClass().getClassLoader().getResource("remote/openai-api.json").toURI());
         var path = Paths.get(jsonFile.getAbsolutePath());
         testResponse = Files.readAllLines(path).stream().collect(Collectors.joining("\n"));
     }
 
     @Test
-    void shouldFetchCorrectly() throws InterruptedException {
+    void shouldRequestCorrectly() throws InterruptedException {
         // arrange
-        int pageSize = 5;
+        String message = "Please, be nice with me!";
         mockBackEnd.enqueue(new MockResponse()
                 .setBody(testResponse)
                 .addHeader("Content-Type", "application/json"));
         // act
-        var result = subject.fetch(pageSize);
+        var result = subject.prompt(message);
         // assert
-        Assertions.assertEquals(2, result.size());
+        Assertions.assertEquals(message, result.getContent());
+        Assert.assertNotNull(result.getResponse());
+        Assert.assertNotNull(result.getTimestamp());
         RecordedRequest recordedRequest = mockBackEnd.takeRequest();
-        Assertions.assertEquals("GET", recordedRequest.getMethod());
+        Assertions.assertEquals("POST", recordedRequest.getMethod());
+        Assertions.assertEquals("/chat/completions", recordedRequest.getPath());
     }
+
 }

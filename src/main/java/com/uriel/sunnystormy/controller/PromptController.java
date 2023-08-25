@@ -2,7 +2,7 @@ package com.uriel.sunnystormy.controller;
 
 import com.uriel.sunnystormy.controller.dto.PromptOutDTO;
 import com.uriel.sunnystormy.controller.mapper.PromptMapper;
-import com.uriel.sunnystormy.service.PromptService;
+import com.uriel.sunnystormy.service.prompt.PromptService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;

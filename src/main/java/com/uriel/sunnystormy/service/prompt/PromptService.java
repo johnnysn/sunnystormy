@@ -1,4 +1,4 @@
-package com.uriel.sunnystormy.service;
+package com.uriel.sunnystormy.service.prompt;
 
 import com.uriel.sunnystormy.data.entity.Prompt;
 import com.uriel.sunnystormy.data.repository.PromptRepository;
@@ -12,8 +12,13 @@ import org.springframework.stereotype.Service;
 public class PromptService {
 
     private final PromptRepository repository;
+    private final RetrieveChatResponseService retrieveChatResponseService;
 
     public Page<Prompt> findAll(Pageable pageable) {
         return repository.findAll(pageable);
+    }
+
+    public Prompt retrieveChatResponse(String message) {
+        return retrieveChatResponseService.execute(message);
     }
 }
