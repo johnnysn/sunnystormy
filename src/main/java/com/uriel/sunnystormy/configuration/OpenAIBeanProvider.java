@@ -1,4 +1,4 @@
-package com.uriel.sunnystormy.config;
+package com.uriel.sunnystormy.configuration;
 
 import com.uriel.sunnystormy.remote.ChatAPIRequestHandler;
 import com.uriel.sunnystormy.remote.OpenAIRequestHandler;

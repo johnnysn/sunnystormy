@@ -9,12 +9,10 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/news")
 @RequiredArgsConstructor
 public class FlavoredNewsController {
 
@@ -24,7 +22,7 @@ public class FlavoredNewsController {
     @Value("${news.provide.maximum-page-size}")
     private Integer maxPageSize;
 
-    @GetMapping
+    @GetMapping("/public/flavored-news")
     public Page<FlavoredNewsOutDTO> findAll(
             @RequestParam(required = false) Integer page,
             @RequestParam(required = false) Integer size
