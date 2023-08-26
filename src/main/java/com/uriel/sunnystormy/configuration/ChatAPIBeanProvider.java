@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class ChatAPIBeanProvider {
 
-    @Value("${chat.api-key}")
+    @Value("${application.chat.api-key}")
     @Setter
     private String apiKey;
 

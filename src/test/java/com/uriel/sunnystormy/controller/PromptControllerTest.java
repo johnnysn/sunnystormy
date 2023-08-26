@@ -27,7 +27,7 @@ class PromptControllerTest {
             @Sql(value = "classpath:db/prompts.sql", executionPhase = BEFORE_TEST_METHOD),
     })
     void shouldRetrieveLastPrompts() throws Exception {
-        this.mockMvc.perform(get("/prompt"))
+        this.mockMvc.perform(get("/prompt").header("ApiKey", "test"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.content").isArray())

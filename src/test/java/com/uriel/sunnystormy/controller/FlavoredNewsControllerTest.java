@@ -28,7 +28,7 @@ class FlavoredNewsControllerTest {
             @Sql(value = "classpath:db/flavored-news.sql", executionPhase = BEFORE_TEST_METHOD),
     })
     void shouldRetrieveLastNews() throws Exception {
-        this.mockMvc.perform(get("/news"))
+        this.mockMvc.perform(get("/public/flavored-news"))
                 .andExpect(status().isOk())
                 .andExpect(content().contentType(MediaType.APPLICATION_JSON))
                 .andExpect(jsonPath("$.content").isArray())

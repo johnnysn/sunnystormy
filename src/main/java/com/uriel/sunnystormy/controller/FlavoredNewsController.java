@@ -19,7 +19,7 @@ public class FlavoredNewsController {
     private final FlavoredNewsService service;
     private final FlavoredNewsMapper mapper;
 
-    @Value("${news.provide.maximum-page-size}")
+    @Value("${application.news.provide.maximum-page-size}")
     private Integer maxPageSize;
 
     @GetMapping("/public/flavored-news")

@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Configuration;
 @Configuration
 public class NewsAPIBeanProvider {
 
-    @Value("${news.api-key}")
+    @Value("${application.news.api-key}")
     @Setter
     private String apiKey;
 
