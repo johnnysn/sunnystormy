@@ -1,7 +1,8 @@
-package com.uriel.sunnystormy.service;
+package com.uriel.sunnystormy.service.flavored;
 
 import com.uriel.sunnystormy.data.entity.FlavoredNews;
 import com.uriel.sunnystormy.data.repository.FlavoredNewsRepository;
+import com.uriel.sunnystormy.service.flavored.FlavoredNewsService;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -31,12 +32,12 @@ class FlavoredNewsServiceTest {
         // arrange
         var news = FlavoredNews.builder()
                 .flavoredTitle("Spider Test")
-                .flavoredContent("Spider test content")
+                .flavoredContent("Spider test description")
                 .flavor(FlavoredNews.Flavor.SUNNY)
                 .build();
         var news2 = FlavoredNews.builder()
                 .flavoredTitle("Scorpion Test")
-                .flavoredContent("Scorpion test content")
+                .flavoredContent("Scorpion test description")
                 .flavor(FlavoredNews.Flavor.STORMY)
                 .build();
         var pageable = PageRequest.of(0, 5);

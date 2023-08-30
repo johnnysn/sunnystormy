@@ -1,5 +1,6 @@
-package com.uriel.sunnystormy.remote;
+package com.uriel.sunnystormy.remote.chat;
 
+import com.uriel.sunnystormy.remote.chat.OpenAIRequestHandler;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;

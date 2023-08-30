@@ -2,7 +2,7 @@ package com.uriel.sunnystormy.service.prompt;
 
 import com.uriel.sunnystormy.data.entity.Prompt;
 import com.uriel.sunnystormy.data.repository.PromptRepository;
-import com.uriel.sunnystormy.remote.ChatAPIRequestHandler;
+import com.uriel.sunnystormy.remote.chat.ChatAPIRequestHandler;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.mockito.InjectMocks;

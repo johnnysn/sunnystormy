@@ -1,4 +1,4 @@
-package com.uriel.sunnystormy.remote;
+package com.uriel.sunnystormy.remote.chat;
 
 import com.uriel.sunnystormy.data.entity.Prompt;
 import com.uriel.sunnystormy.remote.dto.OpenAIMessageDTO;
