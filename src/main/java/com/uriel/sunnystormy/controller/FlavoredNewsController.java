@@ -19,7 +19,7 @@ public class FlavoredNewsController {
     private final FlavoredNewsService service;
     private final FlavoredNewsMapper mapper;
 
-    @Value("${application.news.provide.maximum-page-size}")
+    @Value("${application.news.max-page-size}")
     private Integer maxPageSize;
 
     @GetMapping("/public/flavored-news")
@@ -29,7 +29,7 @@ public class FlavoredNewsController {
     ) {
         int pageNumber = page == null ? 0 : page;
         int pageSize = size == null ? maxPageSize : Math.min(size, maxPageSize);
-        var pageable = PageRequest.of(pageNumber, pageSize, Sort.by("originalNews.date").descending());
+        var pageable = PageRequest.of(pageNumber, pageSize, Sort.by("originalNews.timestamp").descending());
         return service.findAll(pageable).map(mapper::entityToDto);
     }
 

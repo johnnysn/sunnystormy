@@ -5,7 +5,7 @@ import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.UUID;
 
 @Entity
@@ -24,7 +24,7 @@ public class News {
     private UUID id;
 
     @NotNull(message = "Date must not be null")
-    private LocalDate date;
+    private LocalDateTime timestamp;
 
     @NotBlank(message = "Title must not be empty")
     private String title;

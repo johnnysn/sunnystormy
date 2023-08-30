@@ -1,8 +1,7 @@
-package com.uriel.sunnystormy.service;
+package com.uriel.sunnystormy.service.news;
 
 import com.uriel.sunnystormy.data.entity.News;
 import com.uriel.sunnystormy.data.repository.NewsRepository;
-import com.uriel.sunnystormy.remote.NewsAPIRequestHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
@@ -15,13 +14,10 @@ import java.util.List;
 public class NewsService {
 
     private final NewsRepository repository;
-    private final NewsAPIRequestHandler requestBuilder;
+    private final FetchLatestNewsService fetchLatestNewsService;
 
-    public List<News> fetchLatestNews(int pageSize) {
-        var news = requestBuilder.fetch(pageSize);
-        news.forEach(repository::save);
-
-        return news;
+    public List<News> fetchLatestNews(int batchSize) {
+        return fetchLatestNewsService.execute(batchSize);
     }
 
     public Page<News> findAll(PageRequest pageable) {

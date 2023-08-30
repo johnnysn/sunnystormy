@@ -7,7 +7,8 @@ import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.time.format.DateTimeParseException;
 import java.util.Collections;
 import java.util.List;
@@ -29,7 +30,7 @@ public class NewsAPIOrgRequestHandler implements NewsAPIRequestHandler {
                 .uri(uriBuilder -> uriBuilder
                         .path("/top-headlines")
                         .queryParam("apiKey", apiKey)
-                        .queryParam("pageSize", pageSize)
+                        .queryParam("pageSize", pageSize*2)
                         .queryParam("country", "us")
                         .build())
                 .accept(MediaType.APPLICATION_JSON)
@@ -44,16 +45,26 @@ public class NewsAPIOrgRequestHandler implements NewsAPIRequestHandler {
             return Collections.emptyList();
         }
 
-        return response.getArticles().stream().map(this::mapToNews).filter(Objects::nonNull).toList();
+        return response.getArticles().stream()
+                .filter(a -> a.getDescription() != null && !a.getDescription().isBlank())
+                .filter(a -> a.getTitle() != null && !a.getTitle().isBlank())
+                .map(this::mapToNews)
+                .filter(Objects::nonNull)
+                .limit(pageSize)
+                .toList();
     }
 
     private News mapToNews(NewsAPIOrgDTO.Article article) {
         var publishedAt = article.getPublishedAt();
-        LocalDate date;
+        LocalDateTime date;
         if (publishedAt != null && publishedAt.indexOf("T") >= 0) {
-            publishedAt = publishedAt.substring(0, publishedAt.indexOf("T"));
             try {
-                date = LocalDate.parse(publishedAt);
+                if (publishedAt.indexOf("Z") >= 0) {
+                    var zoned = ZonedDateTime.parse(publishedAt);
+                    date = zoned.toLocalDateTime();
+                } else {
+                    date = LocalDateTime.parse(publishedAt);
+                }
             } catch (DateTimeParseException e) {
                 return null;
             }
@@ -65,7 +76,7 @@ public class NewsAPIOrgRequestHandler implements NewsAPIRequestHandler {
                 .title(article.getTitle())
                 .content(article.getDescription())
                 .imgUrl(article.getUrlToImage())
-                .date(date)
+                .timestamp(date)
                 .build();
     }
 
