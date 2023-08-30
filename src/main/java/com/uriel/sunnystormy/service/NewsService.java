@@ -4,6 +4,8 @@ import com.uriel.sunnystormy.data.entity.News;
 import com.uriel.sunnystormy.data.repository.NewsRepository;
 import com.uriel.sunnystormy.remote.NewsAPIRequestHandler;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -22,4 +24,7 @@ public class NewsService {
         return news;
     }
 
+    public Page<News> findAll(PageRequest pageable) {
+        return repository.findAll(pageable);
+    }
 }
