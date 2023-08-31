@@ -4,6 +4,7 @@ import com.uriel.sunnystormy.data.entity.FlavoredNews;
 import com.uriel.sunnystormy.data.entity.News;
 import com.uriel.sunnystormy.data.entity.Prompt;
 import com.uriel.sunnystormy.data.repository.FlavoredNewsRepository;
+import com.uriel.sunnystormy.exception.BadRequestException;
 import com.uriel.sunnystormy.service.prompt.PromptService;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -13,7 +14,8 @@ import org.mockito.junit.jupiter.MockitoExtension;
 import org.springframework.web.server.ResponseStatusException;
 
 import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 @ExtendWith(MockitoExtension.class)
 class GenerateFlavoredNewsServiceTest {
@@ -65,6 +67,17 @@ class GenerateFlavoredNewsServiceTest {
         when(promptService.retrieveChatResponse(mockMessage)).thenReturn(null);
         // act & assert
         assertThrows(ResponseStatusException.class, () -> subject.execute(news, flavor));
+    }
+
+    @Test
+    void shouldThrowException_ifFlavoredNewsAlreadyExists() {
+        // arrange
+        News news = getNews();
+        FlavoredNews.Flavor flavor = FlavoredNews.Flavor.STORMY;
+        var mockMessage = "Please, also consider this";
+        when(repository.existsByOriginalNewsAndFlavor(news, flavor)).thenReturn(true);
+        // act & assert
+        assertThrows(BadRequestException.class, () -> subject.execute(news, flavor));
     }
 
     private News getNews() {

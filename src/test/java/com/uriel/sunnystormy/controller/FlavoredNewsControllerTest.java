@@ -66,4 +66,21 @@ class FlavoredNewsControllerTest {
                 .andExpect(jsonPath("$.originalNews.id").value(news_id))
         ;
     }
+
+    @Test
+    @SqlGroup({
+            @Sql(value = "classpath:db/reset.sql", executionPhase = BEFORE_TEST_METHOD),
+            @Sql(value = "classpath:db/flavored-news.sql", executionPhase = BEFORE_TEST_METHOD),
+    })
+    void shouldRespondWithErrorIfFlavoredNewsAlreadyExists() throws Exception {
+        final String news_id = "874fc980-4054-11ee-be56-0242ac120002";
+        this.mockMvc.perform(
+                        post("/prompting/flavored-news")
+                                .header("ApiKey", apiKey)
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content("{\"news_id\": \""+ news_id +"\", \"flavor\": \"STORMY\"}")
+                )
+                .andExpect(status().isBadRequest())
+        ;
+    }
 }

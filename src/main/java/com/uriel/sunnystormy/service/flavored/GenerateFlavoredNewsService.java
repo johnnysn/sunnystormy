@@ -4,6 +4,7 @@ import com.uriel.sunnystormy.data.entity.FlavoredNews;
 import com.uriel.sunnystormy.data.entity.News;
 import com.uriel.sunnystormy.data.entity.Prompt;
 import com.uriel.sunnystormy.data.repository.FlavoredNewsRepository;
+import com.uriel.sunnystormy.exception.BadRequestException;
 import com.uriel.sunnystormy.service.prompt.PromptService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -20,6 +21,7 @@ class GenerateFlavoredNewsService {
     private final FlavoredNewsRepository repository;
 
     public FlavoredNews execute(News news, FlavoredNews.Flavor flavor) {
+        checkExisting(news, flavor);
         String message = flavoredNewsChatResquestBuilder.build(news.getTitle(), news.getContent(), flavor);
 
         var prompt = getChatResponse(message);
@@ -27,6 +29,11 @@ class GenerateFlavoredNewsService {
 
         repository.save(flavoredNews);
         return flavoredNews;
+    }
+
+    private void checkExisting(News news, FlavoredNews.Flavor flavor) {
+        if (repository.existsByOriginalNewsAndFlavor(news, flavor))
+            throw new BadRequestException("A flavored news has been already generated from the specified article and flavor.");
     }
 
     private FlavoredNews buildFlavoredNews(News news, Prompt prompt, FlavoredNews.Flavor flavor) {
