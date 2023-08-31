@@ -1,9 +1,9 @@
 package com.uriel.sunnystormy.remote.chat;
 
 import com.uriel.sunnystormy.data.entity.Prompt;
-import com.uriel.sunnystormy.remote.dto.OpenAIMessageDTO;
-import com.uriel.sunnystormy.remote.dto.OpenAIRequestDTO;
-import com.uriel.sunnystormy.remote.dto.OpenAIResponseDTO;
+import com.uriel.sunnystormy.remote.chat.dto.OpenAIMessageDTO;
+import com.uriel.sunnystormy.remote.chat.dto.OpenAIRequestDTO;
+import com.uriel.sunnystormy.remote.chat.dto.OpenAIResponseDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;

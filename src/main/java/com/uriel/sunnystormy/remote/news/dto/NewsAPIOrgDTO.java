@@ -1,4 +1,4 @@
-package com.uriel.sunnystormy.remote.dto;
+package com.uriel.sunnystormy.remote.news.dto;
 
 import lombok.Getter;
 import lombok.Setter;

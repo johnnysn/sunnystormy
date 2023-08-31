@@ -1,4 +1,4 @@
-package com.uriel.sunnystormy.remote.dto;
+package com.uriel.sunnystormy.remote.chat.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

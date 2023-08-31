@@ -3,7 +3,7 @@ package com.uriel.sunnystormy.service.news;
 import com.uriel.sunnystormy.configuration.NewsProperties;
 import com.uriel.sunnystormy.data.entity.News;
 import com.uriel.sunnystormy.data.repository.NewsRepository;
-import com.uriel.sunnystormy.remote.NewsAPIRequestHandler;
+import com.uriel.sunnystormy.remote.news.NewsAPIRequestHandler;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

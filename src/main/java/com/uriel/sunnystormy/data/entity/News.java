@@ -30,6 +30,7 @@ public class News {
     private String title;
 
     @NotBlank(message = "Content must not be empty")
+    @Column(length = 400)
     private String content;
 
     private String imgUrl;

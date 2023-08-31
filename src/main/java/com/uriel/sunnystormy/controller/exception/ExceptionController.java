@@ -21,7 +21,7 @@ public class ExceptionController {
         LOGGER.warn("Status exception caught", ex);
 
         return ResponseEntity.status(ex.getStatusCode()).body(new ExceptionResponse(
-                ex.getStatusCode().value(), ex.getMessage()
+                ex.getStatusCode().value(), ex.getReason()
         ));
     }
 

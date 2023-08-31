@@ -1,7 +1,7 @@
 package com.uriel.sunnystormy.configuration;
 
-import com.uriel.sunnystormy.remote.NewsAPIOrgRequestHandler;
-import com.uriel.sunnystormy.remote.NewsAPIRequestHandler;
+import com.uriel.sunnystormy.remote.news.NewsAPIOrgRequestHandler;
+import com.uriel.sunnystormy.remote.news.NewsAPIRequestHandler;
 import lombok.Setter;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;

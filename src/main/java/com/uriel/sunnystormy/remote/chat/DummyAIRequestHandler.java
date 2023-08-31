@@ -11,7 +11,12 @@ public class DummyAIRequestHandler implements ChatAPIRequestHandler {
         return Prompt.builder()
                 .timestamp(LocalDateTime.now())
                 .content(message)
-                .response("I'm a mock AI who answered your request quite properly")
+                .response("""
+                        {
+                        "title": "My dummy flavored title",
+                        "description": "My dummy flavored description"
+                        }
+                        """)
                 .build();
     }
 

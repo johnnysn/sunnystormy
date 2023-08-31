@@ -1,4 +1,4 @@
-package com.uriel.sunnystormy.remote;
+package com.uriel.sunnystormy.remote.news;
 
 import com.uriel.sunnystormy.data.entity.News;
 import org.springframework.stereotype.Component;

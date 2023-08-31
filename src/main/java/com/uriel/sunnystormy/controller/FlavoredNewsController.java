@@ -1,16 +1,16 @@
 package com.uriel.sunnystormy.controller;
 
 import com.uriel.sunnystormy.configuration.NewsProperties;
-import com.uriel.sunnystormy.controller.dto.FlavoredNewsOutDTO;
+import com.uriel.sunnystormy.controller.dto.output.FlavoredNewsOutDTO;
+import com.uriel.sunnystormy.controller.dto.input.FlavoredNewsInDTO;
 import com.uriel.sunnystormy.controller.mapper.FlavoredNewsMapper;
 import com.uriel.sunnystormy.service.flavored.FlavoredNewsService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -30,6 +30,14 @@ public class FlavoredNewsController {
         int pageSize = size == null ? newsProperties.maxPageSize() : Math.min(size, newsProperties.maxPageSize());
         var pageable = PageRequest.of(pageNumber, pageSize, Sort.by("originalNews.timestamp").descending());
         return service.findAll(pageable).map(mapper::entityToDto);
+    }
+
+    @PostMapping("/prompting/flavored-news")
+    public FlavoredNewsOutDTO createFromPrompt(@RequestBody @Valid FlavoredNewsInDTO inDTO) {
+        var flavoredNews = mapper.dtoToEntity(inDTO);
+        return mapper.entityToDto(
+                service.generate(flavoredNews.getOriginalNews(), flavoredNews.getFlavor())
+        );
     }
 
 }

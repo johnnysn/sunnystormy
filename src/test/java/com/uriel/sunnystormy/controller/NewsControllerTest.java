@@ -1,8 +1,8 @@
 package com.uriel.sunnystormy.controller;
 
 import com.uriel.sunnystormy.Application;
-import com.uriel.sunnystormy.remote.NewsAPIOrgRequestHandler;
-import com.uriel.sunnystormy.remote.NewsAPIRequestHandler;
+import com.uriel.sunnystormy.remote.news.NewsAPIOrgRequestHandler;
+import com.uriel.sunnystormy.remote.news.NewsAPIRequestHandler;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import org.hamcrest.Matchers;

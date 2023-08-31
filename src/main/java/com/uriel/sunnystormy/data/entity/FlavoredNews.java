@@ -19,6 +19,7 @@ import java.util.UUID;
 public class FlavoredNews {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private UUID id;
 
     private String flavoredTitle;

@@ -1,7 +1,7 @@
 package com.uriel.sunnystormy.controller;
 
 import com.uriel.sunnystormy.configuration.NewsProperties;
-import com.uriel.sunnystormy.controller.dto.NewsOutDTO;
+import com.uriel.sunnystormy.controller.dto.output.NewsOutDTO;
 import com.uriel.sunnystormy.controller.mapper.NewsMapper;
 import com.uriel.sunnystormy.service.news.NewsService;
 import lombok.RequiredArgsConstructor;

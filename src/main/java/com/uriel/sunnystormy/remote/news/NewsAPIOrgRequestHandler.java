@@ -1,7 +1,7 @@
-package com.uriel.sunnystormy.remote;
+package com.uriel.sunnystormy.remote.news;
 
 import com.uriel.sunnystormy.data.entity.News;
-import com.uriel.sunnystormy.remote.dto.NewsAPIOrgDTO;
+import com.uriel.sunnystormy.remote.news.dto.NewsAPIOrgDTO;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.web.reactive.function.client.WebClient;

@@ -1,4 +1,4 @@
-package com.uriel.sunnystormy.controller.dto;
+package com.uriel.sunnystormy.controller.dto.output;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
