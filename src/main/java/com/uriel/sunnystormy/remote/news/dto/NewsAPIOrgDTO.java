@@ -1,8 +1,6 @@
 package com.uriel.sunnystormy.remote.news.dto;
 
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 import java.util.List;
 
@@ -17,6 +15,9 @@ public class NewsAPIOrgDTO {
     @Getter
     @Setter
     @ToString
+    @Builder
+    @AllArgsConstructor
+    @NoArgsConstructor
     public static class Article {
         private String author;
         private String title;
