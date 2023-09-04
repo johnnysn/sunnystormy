@@ -57,14 +57,15 @@ public class OpenAIRequestHandler implements ChatAPIRequestHandler {
     }
 
     private static OpenAIRequestDTO createRequestBody(String message) {
-        return OpenAIRequestDTO.builder()
-                .model("gtp-3.5-turbo")
-                .messages(List.of(new OpenAIMessageDTO("user", message)))
-                .build();
+        return new OpenAIRequestDTO(
+                "gpt-3.5-turbo",
+                List.of(new OpenAIMessageDTO("user", message)),
+                0.7
+        );
     }
 
     private void fillPromptInfo(Prompt prompt, OpenAIResponseDTO response) {
-        prompt.setResponse(response.getChoices().get(0).getMessage().getContent());
+        prompt.setResponse(response.choices().get(0).message().content());
         prompt.setTimestamp(LocalDateTime.now());
     }
 }

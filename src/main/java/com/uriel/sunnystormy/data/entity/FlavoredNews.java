@@ -25,6 +25,7 @@ public class FlavoredNews {
     private String flavoredTitle;
 
     @NotBlank(message = "Content must not be empty")
+    @Column(length = 1000)
     private String flavoredContent;
 
     @NotNull(message = "Flavor must not be empty")
