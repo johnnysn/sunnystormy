@@ -6,6 +6,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 import java.util.UUID;
 
 @Entity
@@ -34,5 +35,8 @@ public class News {
     private String content;
 
     private String imgUrl;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "originalNews")
+    List<FlavoredNews> flavoredNews;
 
 }

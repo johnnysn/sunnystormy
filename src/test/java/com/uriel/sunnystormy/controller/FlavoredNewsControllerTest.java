@@ -83,4 +83,38 @@ class FlavoredNewsControllerTest {
                 .andExpect(status().isBadRequest())
         ;
     }
+
+    @Test
+    @SqlGroup({
+            @Sql(value = "classpath:db/reset.sql", executionPhase = BEFORE_TEST_METHOD),
+            @Sql(value = "classpath:db/news.sql", executionPhase = BEFORE_TEST_METHOD),
+    })
+    void shouldCreateForLatestNews() throws Exception {
+        this.mockMvc.perform(
+                        post("/prompting/flavored-news/for-latest")
+                                .header("ApiKey", apiKey)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isOk())
+                .andExpect(content().contentType(MediaType.APPLICATION_JSON))
+                .andExpect(jsonPath("$").isArray())
+                .andExpect(jsonPath("$", Matchers.hasSize(2)))
+                .andExpect(jsonPath("$[0].flavor").value("SUNNY"))
+                .andExpect(jsonPath("$[1].flavor").value("STORMY"))
+        ;
+    }
+
+    @Test
+    @SqlGroup({
+            @Sql(value = "classpath:db/reset.sql", executionPhase = BEFORE_TEST_METHOD),
+    })
+    void shouldRespondWithErrorIfTheresNoNewsToBeFlavored() throws Exception {
+        this.mockMvc.perform(
+                        post("/prompting/flavored-news/for-latest")
+                                .header("ApiKey", apiKey)
+                                .contentType(MediaType.APPLICATION_JSON)
+                )
+                .andExpect(status().isNotFound())
+        ;
+    }
 }

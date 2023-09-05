@@ -12,6 +12,8 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 public class FlavoredNewsController {
@@ -38,6 +40,11 @@ public class FlavoredNewsController {
         return mapper.entityToDto(
                 service.generate(flavoredNews.getOriginalNews(), flavoredNews.getFlavor())
         );
+    }
+
+    @PostMapping("/prompting/flavored-news/for-latest")
+    public List<FlavoredNewsOutDTO> createForLatestNews() {
+        return service.generateForLatestNews().stream().map(mapper::entityToDto).toList();
     }
 
 }
