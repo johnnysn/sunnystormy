@@ -28,6 +28,9 @@ Before you start using SunnyStormy, make sure you have the following prerequisit
 - [Java Development Kit (JDK)](https://www.oracle.com/java/technologies/javase-downloads.html) - Version 17 or higher.
 - [Gradle](https://gradle.org/install/) - Build automation and dependency management tool.
 - [Git](https://git-scm.com/downloads) - Version control system.
+
+Also, make sure you have access to the required external resources:
+
 - [NewsAPI API Key](https://newsapi.org/docs/get-started) - Sign up for a free API key to access news data.
 - [OpenAI API Key](https://openai.com/) - Create your account and API key to access AI text completions.
 
