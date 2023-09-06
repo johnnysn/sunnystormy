@@ -4,6 +4,7 @@ import com.uriel.sunnystormy.configuration.NewsProperties;
 import com.uriel.sunnystormy.controller.dto.output.FlavoredNewsOutDTO;
 import com.uriel.sunnystormy.controller.dto.input.FlavoredNewsInDTO;
 import com.uriel.sunnystormy.controller.mapper.FlavoredNewsMapper;
+import com.uriel.sunnystormy.data.entity.FlavoredNews;
 import com.uriel.sunnystormy.service.flavored.FlavoredNewsService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -26,12 +27,13 @@ public class FlavoredNewsController {
     @GetMapping("/public/flavored-news")
     public Page<FlavoredNewsOutDTO> findAll(
             @RequestParam(required = false) Integer page,
-            @RequestParam(required = false) Integer size
-    ) {
+            @RequestParam(required = false) Integer size,
+            @RequestParam(required = false) FlavoredNews.Flavor flavor
+            ) {
         int pageNumber = page == null ? 0 : page;
         int pageSize = size == null ? newsProperties.maxPageSize() : Math.min(size, newsProperties.maxPageSize());
         var pageable = PageRequest.of(pageNumber, pageSize, Sort.by("originalNews.timestamp").descending());
-        return service.findAll(pageable).map(mapper::entityToDto);
+        return service.findAll(flavor, pageable).map(mapper::entityToDto);
     }
 
     @PostMapping("/prompting/flavored-news")
