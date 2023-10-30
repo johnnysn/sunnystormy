@@ -34,6 +34,7 @@ public class News {
     @Column(length = 400)
     private String content;
 
+    @Column(length = 400)
     private String imgUrl;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "originalNews")
