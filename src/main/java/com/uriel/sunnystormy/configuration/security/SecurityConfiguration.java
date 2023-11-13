@@ -30,6 +30,8 @@ public class SecurityConfiguration {
                 .securityMatcher("/**")
                 .authorizeHttpRequests(registry -> registry
                         .requestMatchers( AntPathRequestMatcher.antMatcher("/public/**") ).permitAll()
+                        .requestMatchers( AntPathRequestMatcher.antMatcher("/v3/api-docs/**") ).permitAll()
+                        .requestMatchers( AntPathRequestMatcher.antMatcher("/swagger-ui/**") ).permitAll()
                         .requestMatchers( AntPathRequestMatcher.antMatcher("/about") ).permitAll()
                         .anyRequest().authenticated()
                 )

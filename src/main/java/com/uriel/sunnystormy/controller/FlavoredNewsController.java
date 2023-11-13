@@ -6,6 +6,8 @@ import com.uriel.sunnystormy.controller.dto.input.FlavoredNewsInDTO;
 import com.uriel.sunnystormy.controller.mapper.FlavoredNewsMapper;
 import com.uriel.sunnystormy.data.entity.FlavoredNews;
 import com.uriel.sunnystormy.service.flavored.FlavoredNewsService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -17,6 +19,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
+@Tag(name = "Flavored News Controller", description = "Endpoints related to AI prompting for flavoring news")
 public class FlavoredNewsController {
 
     private final FlavoredNewsService service;
@@ -25,6 +28,12 @@ public class FlavoredNewsController {
     private final NewsProperties newsProperties;
 
     @GetMapping("/public/flavored-news")
+    @Operation(
+            summary = "Retrieves the latest flavored news existing in the database",
+            description = """
+                    The user can specify the page number, the page size (which must not exceed application.news.max-page-size) and the flavor (SUNNY or STORMY).
+                    """
+    )
     public Page<FlavoredNewsOutDTO> findAll(
             @RequestParam(required = false) Integer page,
             @RequestParam(required = false) Integer size,
@@ -37,6 +46,14 @@ public class FlavoredNewsController {
     }
 
     @PostMapping("/prompting/flavored-news")
+    @Operation(
+            summary = "Prompts the chat API for flavoring the specified news fragment",
+            description = """
+                    The resulting flavored news will be returned to the user and saved into the database.
+                    
+                    WARNING: this might consume your AI credits!
+                    """
+    )
     public FlavoredNewsOutDTO createFromPrompt(@RequestBody @Valid FlavoredNewsInDTO inDTO) {
         var flavoredNews = mapper.dtoToEntity(inDTO);
         return mapper.entityToDto(
@@ -45,6 +62,14 @@ public class FlavoredNewsController {
     }
 
     @PostMapping("/prompting/flavored-news/for-latest")
+    @Operation(
+            summary = "Prompts the chat API for flavoring the latest news fragment that has not been yet flavored",
+            description = """
+                    The resulting flavored news will be returned to the user and saved into the database.
+                    
+                    WARNING: this might consume your AI credits!
+                    """
+    )
     public List<FlavoredNewsOutDTO> createForLatestNews() {
         return service.generateForLatestNews().stream().map(mapper::entityToDto).toList();
     }
