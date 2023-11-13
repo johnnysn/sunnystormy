@@ -69,13 +69,14 @@ active, CHAT_API_KEY should be just a dummy key, since no real communication wit
     In order to run the project in production mode and actyally consume ChatGPT AI resources, you should add
 ``--args='--spring.profiles.active=prod'`` to the execution command.
 
-SunnyStormy should now be up and running on [http://localhost:8080](http://localhost:8080).
+SunnyStormy should now be up and running on `http://localhost:8080`.
 
 ## API Endpoints
 
 Endpoints that consume external resources are protected by a simple API key authorization, which 
 is defined by the environment variable ``APP_API_KEY``. The key must be provided in a header
-entry identified by ``ApiKey``. 
+entry identified by ``ApiKey``. You can visualize the API documentation by running the app
+and accessing the Swagger UI: `http://localhost:8080/swagger-ui/index.html`.
 
 ### 1) Fetch Latest News
 
@@ -95,11 +96,11 @@ Retrieves the latest news from an external API with the batch size configured in
 ```json
 [
     {
-        "id": "967d4956-4389-4a72-bc8e-e01bc294371d",
-        "timestamp": "2023-09-05 10:30:00",
-        "title": "Texas Republicans put Trump ally Attorney General Ken Paxton on trial - NBC News",
-        "content": "Texas will have its third-ever impeachment trial, when Attorney General Ken Paxton stands trial on charges of corruption, abuse of public trust and more.",
-        "imgUrl": "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/rockcms/2023-09/230901-ken-paxton-se-1137a-1c130c.jpg"
+        "id": "08da0a53-cedd-4b7c-9a8c-91308be0ea6e",
+        "timestamp": "2023-11-12 09:22:43",
+        "title": "Iceland declares state of emergency over escalating earthquakes, and volcano eruption fears - Euronews",
+        "content": "Iceland has 33 active volcanic systems, the highest number in Europe, and thousands of tremors have been recorded since the end of October.",
+        "imgUrl": "https://static.euronews.com/articles/stories/08/03/27/68/1000x563_cmsv2_fb6b8b7a-7bb3-539f-ae74-c31b10b96c6e-8032768.jpg"
     }
 ]
 ```
@@ -134,16 +135,16 @@ news article identified by its `news_id` and saves it into the database.
 
 ```json
 {
-    "id": "3bd60098-fd4b-4947-9d93-4d9d96bf7882",
-    "flavoredTitle": "Texas Republicans stand up against corruption and abuse of public trust, putting Trump ally Attorney General Ken Paxton on trial",
-    "flavoredContent": "In a historic move, Texas Republicans are taking a stand for integrity and justice as they commence the impeachment trial of Attorney General Ken Paxton. The trial will address charges of corruption and abuse of public trust, showcasing the state's commitment to upholding the highest standards of governance.",
+    "id": "712dcecf-0bbf-49ac-9d68-71f329163d23",
+    "flavoredTitle": "Iceland's Resilience Shines as State of Emergency Declared Amidst Earthquakes and Volcano Eruption Fears",
+    "flavoredContent": "Iceland, home to Europe's highest number of volcanic systems, showcases its strength and preparedness as it declares a state of emergency amidst escalating earthquakes and fears of a volcano eruption. Thousands of tremors have been recorded since October, highlighting the country's resilience and dedication to ensuring public safety.",
     "flavor": "SUNNY",
     "originalNews": {
-        "id": "967d4956-4389-4a72-bc8e-e01bc294371d",
-        "timestamp": "2023-09-05 10:30:00",
-        "title": "Texas Republicans put Trump ally Attorney General Ken Paxton on trial - NBC News",
-        "content": "Texas will have its third-ever impeachment trial, when Attorney General Ken Paxton stands trial on charges of corruption, abuse of public trust and more.",
-        "imgUrl": "https://media-cldnry.s-nbcnews.com/image/upload/t_nbcnews-fp-1200-630,f_auto,q_auto:best/rockcms/2023-09/230901-ken-paxton-se-1137a-1c130c.jpg"
+        "id": "08da0a53-cedd-4b7c-9a8c-91308be0ea6e",
+        "timestamp": "2023-11-12 09:22:43",
+        "title": "Iceland declares state of emergency over escalating earthquakes, and volcano eruption fears - Euronews",
+        "content": "Iceland has 33 active volcanic systems, the highest number in Europe, and thousands of tremors have been recorded since the end of October.",
+        "imgUrl": "https://static.euronews.com/articles/stories/08/03/27/68/1000x563_cmsv2_fb6b8b7a-7bb3-539f-ae74-c31b10b96c6e-8032768.jpg"
     }
 }
 ```
